@@ -1,51 +1,42 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
     margin: 0;
-    padding: 20px;
+    padding: 0;
 }
 
 h1 {
-    color: #2c3e50;
+    background-color: #333;
+    color: white;
     text-align: center;
-    font-size: 36px;
-    margin-bottom: 20px;
+    padding: 20px;
+    font-size: 24px;
+    font-weight: bold;
 }
 
-#characters {
+ul {
     list-style-type: none;
     padding: 0;
-    max-width: 300px;
-    margin: 0 auto;
+    margin: 0;
 }
 
-#characters li {
-    background-color: #e74c3c;
-    color: white;
-    padding: 10px;
-    margin: 5px 0;
-    text-align: center; /* Change this line */
-    border-radius: 5px;
+ul li {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
     font-size: 18px;
-    display: flex;
-    justify-content: center; /* Add this line for better centering */
-    align-items: center;
 }
 
-#characters li a {
-    color: white;
+ul li:hover {
+    background-color: #f1f1f1;
+}
+
+/* Style pour le texte des éléments de la liste */
+ul li a {
     text-decoration: none;
-    margin-left: 10px;
+    color: black;
+    display: block;
 }
 
-#characters li:hover {
-    background-color: #c0392b;
-    cursor: pointer;
-}
-
-/* Style des images des héros */
-.hero-img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+/* Hover effect pour chaque élément de la liste */
+ul li a:hover {
+    color: #333;
 }
