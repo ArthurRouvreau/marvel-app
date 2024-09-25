@@ -1,5 +1,5 @@
 function getCharacters() {
-    fetch('src/data/characters.json')
+    fetch('http://127.0.0.1:5500/src/data/characters.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
