@@ -1,26 +1,15 @@
-function getCharacters() {
-    fetch('http://127.0.0.1:5500/src/data/characters.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            const charactersList = document.getElementById('characters');
-            charactersList.innerHTML = ''; // Clear existing content
-            
-            data.forEach(character => {
-                const li = document.createElement('li');
-                li.textContent = `${character.id}: ${character.name}`; // Display id and name
-                charactersList.appendChild(li);
-
-                const hr = document.createElement('hr');
-                charactersList.appendChild(hr);
-            });
-        })
-        .catch(error => console.error('Error fetching characters:', error));
-}
-
-// Call the function to fetch and display characters
-getCharacters();
+async function getCharacters() {
+    try {
+      const response = await fetch('http://127.0.0.1:5500/src/data/characters.json');
+      if (!response.ok) {
+        throw new Error('Failed to fetch characters');
+      }
+      const characters = await response.json();
+      console.log(characters);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+  
+  // Appel de la fonction pour récupérer les données
+  getCharacters();
