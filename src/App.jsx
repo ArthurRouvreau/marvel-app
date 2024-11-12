@@ -1,21 +1,14 @@
 import './App.css'
 
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import routes from './routes'
+
+// Create a router that uses the client side history strategy for
+const router = createBrowserRouter(routes)
+
 function App() {
   return (
-    <>
-      <h1>Marvel Characters</h1>
-      <ul id="characters">
-        <li>
-          Beast
-        </li>
-        <li>
-          Captain America
-        </li>
-        <li>
-          Deadpool
-        </li>
-      </ul>
-    </>
+    <RouterProvider router={router} />
   )
 }
 
