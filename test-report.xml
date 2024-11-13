@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="C:\Users\jrossi04\marvel-app\src\pages\ContactPage.test.jsx">
-    <testCase name="render ContactPage component" duration="49"/>
+  <file path="C:\Users\arouvr03\marvel-app\src\api\characters-api.test.js">
+    <testCase name="getCharacters should return the list of characters" duration="8"/>
+    <testCase name="getCharacterById should return the correct character when a valid ID is provided" duration="1"/>
+    <testCase name="getCharacterById should throw an error when an invalid ID is provided" duration="7"/>
+  </file>
+  <file path="C:\Users\arouvr03\marvel-app\src\components\NumberOfCharacters.test.jsx">
+    <testCase name="renders &quot;There is no character&quot; when characters array is empty" duration="26"/>
+    <testCase name="renders the correct number of characters when characters array is not empty" duration="2"/>
+    <testCase name="renders &quot;There is no character&quot; when no characters are provided" duration="3"/>
+  </file>
+  <file path="C:\Users\arouvr03\marvel-app\src\components\CharacterDetail.test.jsx">
+    <testCase name="CharacterDetail component renders character image, description and modification date" duration="38"/>
+    <testCase name="CharacterDetail component renders default description when no description is available" duration="5"/>
+    <testCase name="CharacterDetail component renders default modification date when no modification date is available" duration="4"/>
+  </file>
+  <file path="C:\Users\arouvr03\marvel-app\src\pages\CharacterDetailPage.test.jsx">
+    <testCase name="CharacterDetailPage renders character details correctly" duration="33"/>
+  </file>
+  <file path="C:\Users\arouvr03\marvel-app\src\pages\AboutPage.test.jsx">
+    <testCase name="render AboutPage component" duration="66"/>
+  </file>
+  <file path="C:\Users\arouvr03\marvel-app\src\pages\ContactPage.test.jsx">
+    <testCase name="render ContactPage component" duration="68"/>
+  </file>
+  <file path="C:\Users\arouvr03\marvel-app\src\components\CharactersList.test.jsx">
+    <testCase name="CharactersList component renders the correct number of characters and a link for each character" duration="86"/>
+    <testCase name="CharactersList component renders an empty list when no characters are provided" duration="3"/>
+    <testCase name="CharactersList component renders when nothing is provided" duration="3"/>
+  </file>
+  <file path="C:\Users\arouvr03\marvel-app\src\pages\CharactersPage.test.jsx">
+    <testCase name="render CharactersPage component" duration="66"/>
   </file>
 </testExecutions>
