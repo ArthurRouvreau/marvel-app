@@ -1,9 +1,7 @@
-export function NumberOfCharacters({ characters =[]}) {
-  const count = characters.length;
+export function NumberOfCharacters({ characters = [] }) {
+  if (characters.length === 0) {
+    return <p>There is no character</p>;
+  }
 
-  return (
-    <div>
-      {count > 0 ? `There is ${count} character${count > 1 ? 's' : ''}` : 'There is no character'}
-    </div>
-  );
+  return <p>There is {characters.length} characters</p>;
 }

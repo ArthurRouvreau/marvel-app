@@ -1,24 +1,28 @@
 import { getCharacters, getCharacterById } from './characters-api';
 import characters from '../data/characters.json';
 
-// src/api/characters-api.test.js
+// FILE: src/api/characters-api.test.js
 
-jest.mock('../data/characters.json', () => [
+jest.mock('../data/characters.json', () => ([
     { id: 1, name: 'Character One' },
     { id: 2, name: 'Character Two' },
-]);
+    { id: 3, name: 'Character Three' }
+]));
+
 describe('getCharacters', () => {
-    test('should return the list of characters', () => {
+    it('should return the list of characters', () => {
         const result = getCharacters();
         expect(result).toEqual(characters);
     });
 });
+
 describe('getCharacterById', () => {
-    test('should return the correct character when a valid ID is provided', () => {
+    it('should return the character with the given id', () => {
         const result = getCharacterById(1);
         expect(result).toEqual({ id: 1, name: 'Character One' });
     });
-    test('should throw an error when an invalid ID is provided', () => {
+
+    it('should throw an error if the character with the given id is not found', () => {
         expect(() => getCharacterById(999)).toThrow('Character with id 999 not found');
     });
 });

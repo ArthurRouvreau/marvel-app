@@ -23,28 +23,33 @@ jest.mock('react-router', () => ({
     },
 }));
 
-test('render CharactersPage component', () => {
-    // when
+describe('CharactersPage', () => {
 
-    // then
-    render(<CharactersPage />, { wrapper: BrowserRouter });
+    test('render CharactersPage component', () => {
+        // when
 
-    // expect the document title to be "Marvel App"
-    expect(document.title).toBe('Marvel App');
+        // then
+        render(<CharactersPage />, { wrapper: BrowserRouter });
 
-    // expect the heading 'Marvel Characters' to be in the document
-    const h2Element = screen.getByRole('heading', { level: 2, name: "Marvel Characters" });
-    expect(h2Element).toBeInTheDocument();
+        // expect the document title to be "Marvel App"
+        expect(document.title).toBe('Marvel App');
 
-    // expect the character Thor to be in the document
-    const thorElement = screen.getByText(characters[0].name);
-    expect(thorElement).toBeInTheDocument();
 
-    // expect the charater Captain America to be in the document
-    const captainAmericaElement = screen.getByText(characters[1].name);
-    expect(captainAmericaElement).toBeInTheDocument();
-    
-    // expect the number of characters to be in the document
-    const numberOfCharactersElement = screen.getByText(`There is ${characters.length} characters`);
-    expect(numberOfCharactersElement).toBeInTheDocument();
+        // expect the heading 'Marvel Characters' to be in the document
+        const h2Element = screen.getByRole('heading', { level: 2, name: "Marvel Characters" });
+        expect(h2Element).toBeInTheDocument();
+
+        // expect the character Thor to be in the document
+        const thorElement = screen.getByText(characters[0].name);
+        expect(thorElement).toBeInTheDocument();
+
+        // expect the charater Captain America to be in the document
+        const captainAmericaElement = screen.getByText(characters[1].name);
+        expect(captainAmericaElement).toBeInTheDocument();
+
+        // expect the number of characters to be in the document
+        const numberOfCharactersElement = screen.getByText(`There is ${characters.length} characters`);
+        expect(numberOfCharactersElement).toBeInTheDocument();
+    });
+
 });

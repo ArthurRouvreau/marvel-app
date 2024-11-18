@@ -1,34 +1,48 @@
-// src/pages/CharacterDetailPage.test.jsx
-
 import '@testing-library/jest-dom';
-import React from 'react';
-import { render } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { render, screen } from '@testing-library/react';
+import { useLoaderData } from 'react-router';
 import CharacterDetailPage from './CharacterDetailPage';
-import { useLoaderData } from 'react-router-dom';
 
 // Mock the useLoaderData hook
-jest.mock('react-router-dom', () => ({
-    ...jest.requireActual('react-router-dom'),
+jest.mock('react-router', () => ({
     useLoaderData: jest.fn(),
 }));
-
+ 
 describe('CharacterDetailPage', () => {
-    it('renders character details correctly', () => {
-        const mockCharacter = {
-            name: 'Spider-Man',
-            description: 'Friendly neighborhood Spider-Man',
-        };
+    const character = {
+        name: 'Thor',
+        description: 'God of Thunder',
+        modified: '2023-10-01',
+        thumbnail: { path: 'path/to/image', extension: 'jpg' },
+        capacities: {
+            force: 5,
+            intelligence: 8,
+            durability: 6,
+            energy: 6,
+            speed: 1,
+            fighting: 3
+        }
+    };
 
-        useLoaderData.mockReturnValue(mockCharacter);
+    beforeEach(() => {
+        useLoaderData.mockReturnValue(character);
+    });
 
-        const { getByText } = render(
-            <MemoryRouter>
-                <CharacterDetailPage />
-            </MemoryRouter>
-        );
+    test('render CharacterDetailPage component', () => {
+        render(<CharacterDetailPage />);
+        expect(document.title).toBe('Thor | Marvel App');
 
-        expect(getByText('Spider-Man')).toBeInTheDocument();
-        expect(getByText('Friendly neighborhood Spider-Man')).toBeInTheDocument();
+        const nameElement = screen.getByText(character.name);
+        expect(nameElement).toBeInTheDocument();
+
+        const descriptionElement = screen.getByText(character.description);
+        expect(descriptionElement).toBeInTheDocument();
+
+        const modifiedElement = screen.getByText(character.modified);
+        expect(modifiedElement).toBeInTheDocument();
+
+        const imageElement = screen.getByAltText(character.name);
+        expect(imageElement).toBeInTheDocument();
+        expect(imageElement).toHaveAttribute('src', 'path/to/image/standard_large.jpg');
     });
 });

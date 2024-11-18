@@ -1,29 +1,22 @@
-// Cette façon de faire fonctionne, mais elle n'est pas optimale. Elle mélange la récupération des données et l'affichage des composants.
-// react_router nous permet de faire mieux en utilisant des hooks pour récupérer les données avant d'afficher le composant et ainsi de séparer récupération des données et affichage.
-// Adapter le code pour utiliser react_router et les hooks comme dans l'exemple du guide, grâce aux concepts de loader et useLoaderData . On appelera directement la fonction getCharacters dans le loader (pas de fonction fetch ).
-import { NumberOfCharacters } from '../components/NumberOfCharacters'; // Chemin d'accès pour l'importation
+import React from 'react';
+import { CharactersList } from "../components/CharactersList";
+import { NumberOfCharacters } from "../components/NumberOfCharacters";
+import { useLoaderData } from 'react-router';
 
-import { useLoaderData } from "react-router-dom";
-import React, { useEffect } from 'react';
+const CharactersPage = () => {
+    // change the title of the page
+    document.title = "Marvel App";
 
-export default function CharactersPage() {
-    const characters = useLoaderData(); // Assurez-vous que cette fonction soit importée correctement
-    // Utilisé pour changer le titre de la page
-    useEffect(() => {
-        document.title = "Marvel App"; // Modification du titre de la page
-    }, []);
+    const characters = useLoaderData();
 
     return (
-        <div>
+        <>
             <h2>Marvel Characters</h2>
-            <ul>
-                {characters.map(character => (
-                    <li key={character.id}>
-                        <a href={`/character/${character.id}`}>{character.name}</a>
-                    </li>
-                ))}
-            </ul>
+            <CharactersList characters={characters} />
+            <br />
             <NumberOfCharacters characters={characters} />
-        </div>
+        </>
     );
-}
+};
+
+export default CharactersPage;
