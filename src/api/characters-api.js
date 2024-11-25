@@ -1,11 +1,19 @@
+
 import characters from '../data/characters.json'
+
+export const DEFAULT_ORDER_BY = 'name';
+export const DEFAULT_ORDER = 'asc';
 
 /**
  * List of characters
  * @returns {Array} characters
  */
-export const getCharacters = () => {
-    return characters;
+export const getCharacters = (orderBy = DEFAULT_ORDER_BY, order = DEFAULT_ORDER) => {
+    const sortedCharacters =  [...characters].sort((a, b) => 
+        order === 'asc' ? a[orderBy].localeCompare(b[orderBy]) : b[orderBy].localeCompare(a[orderBy])
+    );
+
+    return sortedCharacters;
 }
 
 /**

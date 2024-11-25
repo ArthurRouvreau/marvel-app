@@ -1,8 +1,9 @@
 import '@testing-library/jest-dom';
 
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import CharactersPage from './CharactersPage';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, MemoryRouter } from 'react-router-dom';
+import { DEFAULT_ORDER, DEFAULT_ORDERBY } from '../api/characters-api';
 
 const characters = [
     {
@@ -29,7 +30,7 @@ describe('CharactersPage', () => {
         // when
 
         // then
-        render(<CharactersPage />, { wrapper: BrowserRouter });
+        render(<BrowserRouter future={{ v7_relativeSplatPath: true, v7_startTransition: true }}><CharactersPage /></BrowserRouter>);
 
         // expect the document title to be "Marvel App"
         expect(document.title).toBe('Marvel App');
@@ -48,8 +49,71 @@ describe('CharactersPage', () => {
         expect(captainAmericaElement).toBeInTheDocument();
 
         // expect the number of characters to be in the document
-        const numberOfCharactersElement = screen.getByText(`There is ${characters.length} characters`);
+        const numberOfCharactersElement = screen.getByText(`There are ${characters.length} characters`);
         expect(numberOfCharactersElement).toBeInTheDocument();
     });
+
+    test('render CharactersPage component with order and orderBy from search params', async () => {
+        // when
+        const order = 'desc';
+        const orderBy = 'modified';
+
+        // then
+        render(
+            <MemoryRouter initialEntries={[`/?order=${order}&orderBy=${orderBy}`]} >
+                <CharactersPage />
+            </MemoryRouter>
+        );
+
+        // screen.debug()
+
+        // expect the order to be the same as the search params
+        const orderBySelectElement = screen.getByTestId('orderBy');
+        expect(orderBySelectElement).toHaveValue(orderBy);
+
+        // expect the orderBy to be the same as the search params
+        const orderSelectElement = screen.getByTestId('order');
+        expect(orderSelectElement).toHaveValue(order);
+    });
+
+    test('render CharactersPage component with order and orderBy when the select changes', async () => {
+        // when
+        const order = 'desc';
+        const orderBy = 'modified';
+
+        // then
+        render(
+            <MemoryRouter future={{ v7_relativeSplatPath: true, v7_startTransition: true }} initialEntries={[`/`]} >
+                <CharactersPage />
+            </MemoryRouter>
+        );
+
+        // expect the order to be the default value
+        const orderBySelectElement = screen.getByTestId('orderBy');
+        expect(orderBySelectElement).toHaveValue(DEFAULT_ORDERBY);
+
+        // expect the orderBy to be default value
+        const orderSelectElement = screen.getByTestId('order');
+        expect(orderSelectElement).toHaveValue(DEFAULT_ORDER);
+
+        // when
+        act(() => {
+            // change the order select to desc
+            const orderSelect = screen.getByTestId('order');
+            orderSelect.value = order;
+            orderSelect.dispatchEvent(new Event('change', { bubbles: true }));
+
+            // then
+            expect(orderSelect).toHaveValue(order);
+
+            // change the orderBy select to modified
+            const orderBySelect = screen.getByTestId('orderBy');
+            orderBySelect.value = orderBy;
+            orderBySelect.dispatchEvent(new Event('change', { bubbles: true }));
+
+            // then
+            expect(orderBySelect).toHaveValue(orderBy);
+        });
+    })
 
 });

@@ -12,9 +12,7 @@ const CharacterDetailPage = () => {
     }, [character]);
 
     return (
-        <>
-            <CharacterDetail character={character} />
-        </>
+        <CharacterDetail character={character} />        
     );
 };
 

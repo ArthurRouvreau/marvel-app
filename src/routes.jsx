@@ -1,30 +1,38 @@
-// Importez les fonctions nécessaires depuis characters-api.js
-import { getCharacters, getCharacterById } from './api/characters-api';
+import { DEFAULT_ORDER, DEFAULT_ORDER_BY, getCharacterById, getCharacters } from "./api/characters-api";
 import Layout from "./Layout";
 import AboutPage from "./pages/AboutPage";
+import CharacterDetailPage from "./pages/CharacterDetailPage";
 import CharactersPage from "./pages/CharactersPage";
 import ContactPage from "./pages/ContactPage";
-import CharacterDetailPage from "./pages/CharacterDetailPage"; // Assurez-vous d'importer votre composant
 
 const routes = [
     {
         path: "/",
         element: <Layout />,
         children: [
-            { path: "/", element: <CharactersPage />, loader: getCharacters }, // Vous pouvez maintenant utiliser getCharacters directement
+            {
+                path: "/",
+                element: <CharactersPage />,
+                loader: ({ request }) => {
+                    // Get the sort and order query parameters from the URL
+                    const url = new URL(request.url);
+                    const searchParams = url.searchParams;
+
+                    const orderBy = searchParams.get("orderBy") || DEFAULT_ORDER_BY
+                    const order = searchParams.get("order") || DEFAULT_ORDER
+
+                    console.log(`orderBy: ${orderBy}, order: ${order}`);
+
+                    return getCharacters(orderBy, order)
+                }
+            },
+            {
+                path: "/characters/:id",
+                element: <CharacterDetailPage />,
+                loader: ({ params }) => getCharacterById(params.id),
+            },
             { path: "/about", element: <AboutPage /> },
             { path: "/contact", element: <ContactPage /> },
-            {
-                path: "/character/:id", // Route pour afficher les détails d'un personnage
-                element: <CharacterDetailPage />,
-                loader: async ({ params }) => {
-                    const character = getCharacterById(params.id); // Appel direct à getCharacterById
-                    if (!character) {
-                        throw new Response("Character not found", { status: 404 });
-                    }
-                    return character;
-                },
-            },
         ],
     },
 ];
