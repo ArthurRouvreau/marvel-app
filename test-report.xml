@@ -1,49 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="C:\Users\arouvr03\marvel-app\src\components\chart-utils.test.js">
-    <testCase name="prepareData prepareData with empty data" duration="7"/>
-    <testCase name="prepareData prepareData with data" duration="1"/>
-    <testCase name="prepareData prepareData with data with undefined values" duration="1"/>
-    <testCase name="prepareData prepareData with data with null values" duration="1"/>
-  </file>
-  <file path="C:\Users\arouvr03\marvel-app\src\components\D3PieChart.test.js">
-  </file>
-  <file path="C:\Users\arouvr03\marvel-app\src\components\RechartsPieChart.test.js">
-    <testCase name="RechartsPieChart renders the pie chart with correct data" duration="49">
-      <failure message="TypeError: expect(...).toBeInTheDocument is not a function"><![CDATA[TypeError: expect(...).toBeInTheDocument is not a function
-    at Object.toBeInTheDocument (C:\Users\arouvr03\marvel-app\src\components\RechartsPieChart.test.js:23:61)
-    at Promise.then.completed (C:\Users\arouvr03\marvel-app\node_modules\jest-circus\build\utils.js:298:28)
-    at new Promise (<anonymous>)
-    at callAsyncCircusFn (C:\Users\arouvr03\marvel-app\node_modules\jest-circus\build\utils.js:231:10)
-    at _callCircusTest (C:\Users\arouvr03\marvel-app\node_modules\jest-circus\build\run.js:316:40)
-    at processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at _runTest (C:\Users\arouvr03\marvel-app\node_modules\jest-circus\build\run.js:252:3)
-    at _runTestsForDescribeBlock (C:\Users\arouvr03\marvel-app\node_modules\jest-circus\build\run.js:126:9)
-    at _runTestsForDescribeBlock (C:\Users\arouvr03\marvel-app\node_modules\jest-circus\build\run.js:121:9)
-    at run (C:\Users\arouvr03\marvel-app\node_modules\jest-circus\build\run.js:71:3)
-    at runAndTransformResultsToJestFormat (C:\Users\arouvr03\marvel-app\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:122:21)
-    at jestAdapter (C:\Users\arouvr03\marvel-app\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
-    at runTestInternal (C:\Users\arouvr03\marvel-app\node_modules\jest-runner\build\runTest.js:367:16)
-    at runTest (C:\Users\arouvr03\marvel-app\node_modules\jest-runner\build\runTest.js:444:34)
-    at Object.worker (C:\Users\arouvr03\marvel-app\node_modules\jest-runner\build\testWorker.js:106:12)]]></failure>
-    </testCase>
-    <testCase name="RechartsPieChart  don&apos;t fail when data is null" duration="5">
-      <failure message="TypeError: expect(...).toBeInTheDocument is not a function"><![CDATA[TypeError: expect(...).toBeInTheDocument is not a function
-    at Object.toBeInTheDocument (C:\Users\arouvr03\marvel-app\src\components\RechartsPieChart.test.js:34:61)
-    at Promise.then.completed (C:\Users\arouvr03\marvel-app\node_modules\jest-circus\build\utils.js:298:28)
-    at new Promise (<anonymous>)
-    at callAsyncCircusFn (C:\Users\arouvr03\marvel-app\node_modules\jest-circus\build\utils.js:231:10)
-    at _callCircusTest (C:\Users\arouvr03\marvel-app\node_modules\jest-circus\build\run.js:316:40)
-    at processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at _runTest (C:\Users\arouvr03\marvel-app\node_modules\jest-circus\build\run.js:252:3)
-    at _runTestsForDescribeBlock (C:\Users\arouvr03\marvel-app\node_modules\jest-circus\build\run.js:126:9)
-    at _runTestsForDescribeBlock (C:\Users\arouvr03\marvel-app\node_modules\jest-circus\build\run.js:121:9)
-    at run (C:\Users\arouvr03\marvel-app\node_modules\jest-circus\build\run.js:71:3)
-    at runAndTransformResultsToJestFormat (C:\Users\arouvr03\marvel-app\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:122:21)
-    at jestAdapter (C:\Users\arouvr03\marvel-app\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
-    at runTestInternal (C:\Users\arouvr03\marvel-app\node_modules\jest-runner\build\runTest.js:367:16)
-    at runTest (C:\Users\arouvr03\marvel-app\node_modules\jest-runner\build\runTest.js:444:34)
-    at Object.worker (C:\Users\arouvr03\marvel-app\node_modules\jest-runner\build\testWorker.js:106:12)]]></failure>
-    </testCase>
+  <file path="C:\Users\arouvr03\marvel-app\src\pages\CharacterDetailPage.test.jsx">
   </file>
 </testExecutions>
