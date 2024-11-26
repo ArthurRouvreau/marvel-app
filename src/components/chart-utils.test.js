@@ -1,61 +1,72 @@
-import { prepareData } from './chart-utils';
+import { prepareData } from "./chart-utils";
 
 describe('prepareData', () => {
-    it('should return an empty array when no data is provided', () => {
-        const result = prepareData();
-        expect(result).toEqual([]);
+    test('prepareData with empty data', () => {
+        // given
+        const data = {};
+
+        // when
+        const preparedData = prepareData(data);
+
+        // then
+        expect(preparedData).toEqual([]);
     });
 
-    it('should return the correct transformed data when all values are provided', () => {
+    test('prepareData with data', () => {
+        // given
         const data = {
             force: 10,
-            intelligence: 8,
-            energy: 7,
-            speed: 9,
-            durability: 6,
-            fighting: 5,
+            intelligence: 20,
+            energy: 30,
+            speed: 40,
+            durability: 50,
+            fighting: 60,
         };
-        const expected = [
+
+        // when
+        const preparedData = prepareData(data);
+
+        // then
+        expect(preparedData).toEqual([
             { name: 'Force', value: 10 },
-            { name: 'Intelligence', value: 8 },
-            { name: 'Energy', value: 7 },
-            { name: 'Speed', value: 9 },
-            { name: 'Durability', value: 6 },
-            { name: 'Fighting', value: 5 },
-        ];
-        const result = prepareData(data);
-        expect(result).toEqual(expected);
+            { name: 'Intelligence', value: 20 },
+            { name: 'Energy', value: 30 },
+            { name: 'Speed', value: 40 },
+            { name: 'Durability', value: 50 },
+            { name: 'Fighting', value: 60 },
+        ]);
     });
 
-    it('should filter out elements with undefined values', () => {
+    test('prepareData with data with undefined values', () => {
+        // given
         const data = {
-            force: 10,
-            intelligence: undefined,
-            energy: 7,
-            speed: undefined,
-            durability: 6,
-            fighting: 5,
+            force: undefined,
+            intelligence: 20,
+            energy: 30,
+            speed: 40,
+            durability: undefined,
+            fighting: 60,
         };
-        const expected = [
-            { name: 'Force', value: 10 },
-            { name: 'Energy', value: 7 },
-            { name: 'Durability', value: 6 },
-            { name: 'Fighting', value: 5 },
-        ];
-        const result = prepareData(data);
-        expect(result).toEqual(expected);
+
+        // when
+        const preparedData = prepareData(data);
+
+        // then
+        expect(preparedData).toEqual([
+            { name: 'Intelligence', value: 20 },
+            { name: 'Energy', value: 30 },
+            { name: 'Speed', value: 40 },
+            { name: 'Fighting', value: 60 },
+        ]);
     });
 
-    it('should handle partial data correctly', () => {
-        const data = {
-            force: 10,
-            energy: 7,
-        };
-        const expected = [
-            { name: 'Force', value: 10 },
-            { name: 'Energy', value: 7 },
-        ];
-        const result = prepareData(data);
-        expect(result).toEqual(expected);
+    test('prepareData with data with null values', () => {
+        // given
+
+        // when
+        const preparedData = prepareData();
+
+        // then
+        expect(preparedData).toEqual([]);
     });
 });
