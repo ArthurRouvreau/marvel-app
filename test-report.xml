@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
+  <file path="C:\Users\arouvr03\marvel-app\src\components\chart-utils.test.js">
+    <testCase name="prepareData should return an empty array when no data is provided" duration="6"/>
+    <testCase name="prepareData should return the correct transformed data when all values are provided" duration="1"/>
+    <testCase name="prepareData should filter out elements with undefined values" duration="0"/>
+    <testCase name="prepareData should handle partial data correctly" duration="1"/>
+  </file>
   <file path="C:\Users\arouvr03\marvel-app\src\pages\CharacterDetailPage.test.jsx">
+  </file>
+  <file path="C:\Users\arouvr03\marvel-app\src\components\D3PieChart.test.js">
+  </file>
+  <file path="C:\Users\arouvr03\marvel-app\src\components\RechartsPieChart.test.js">
+    <testCase name="RechartsPieChart renders RechartsPieChart" duration="53"/>
   </file>
 </testExecutions>
