@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testExecutions version="1">
-  <file path="C:\Users\arouvr03\marvel-app\src\Layout.test.jsx">
-    <testCase name="renders the layout with correct elements" duration="60"/>
-  </file>
-  <file path="C:\Users\arouvr03\marvel-app\tests-examples\demo-todo-app.spec.js">
-  </file>
-</testExecutions>

@@ -48,6 +48,16 @@ module.exports = defineConfig({
       use: { ...devices['Desktop Safari'] },
     },
 
+    {
+      name: 'Mobile Chrome',
+      use: {
+        ...devices['Desktop Chrome'],
+        // It is important to define the `viewport` property after destructuring `devices`,
+        // since devices also define the `viewport` for that device.
+        viewport: { width: 599, height: 900 },
+       },
+    },
+
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',

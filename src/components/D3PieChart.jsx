@@ -17,23 +17,88 @@ const height = 2 * diameter + margin.top + margin.bottom;
 // Define the radius
 const radius = Math.min(width, height) / 2;
 
+/**
+ * Draw the pie chart
+ * @param {*} data 
+ * @param {*} displayTooltip 
+ * @param {*} displayValue 
+ */
 const drawChart = (data) => {
     // Remove the old svg if it exists (in development)
     d3.select('#pie-container')
         .select('svg')
         .remove();
 
-    // TODO: draw the chart here base on example https://observablehq.com/@d3/donut-chart/2
-        // Create the color scale
-        // Create the pie chart
-            // Create the arc
-            // Create the pie
-            // Create the svg, with the right dimensions
-        // draw the donut
-        // add labels over the donut
+    // Create the color scale
+    const color = d3.scaleOrdinal()
+        // colors based on data
+        .domain(data.map(d => d.name))
+        // .range(["red", "blue", "green", "yellow", "orange", "purple"]);
+        // .range(d3.schemeDark2);
+        .range(d3.quantize(t => d3.interpolateSpectral(t * 0.8 + 0.1), data.length).reverse());
 
+    // Create the arc
+    const arc = d3.arc()
+        .cornerRadius(5) // Rounded corners
+        .innerRadius(radius * 0.5) // This is the size of the donut hole
+        .outerRadius(radius) // This is the size of the donut
+        .padAngle(0.011) // padding between slices
+
+    // Create the pie
+    const pie = d3.pie(data)
+        .sort(null) // disable sorting of data
+        .value(d => d.value);
+
+    // Create the svg, with the right dimensions
+    const svg = d3
+        .select('#pie-container')
+        .append('svg')
+        .attr("width", width)
+        .attr("height", height)
+        .attr("viewBox", [-width / 2, -height / 2, width, height]) // center the pie chart
+
+    // draw the donut
+    svg.append("g")
+        .selectAll()
+        .data(pie(data))
+        .join("path")
+        .attr("fill", d => color(d.data.name))
+        .attr("d", arc)
+
+    // add labels over the donut
+    svg.append("g")
+        // text style
+        .attr("font-family", "sans-serif")
+        .attr("font-size", 12)
+        .attr("text-anchor", "middle")
+        .selectAll()
+        .data(pie(data))
+        .join("text")
+        // center the text
+        .attr("transform", d => `translate(${arc.centroid(d)})`)
+        // add the name of the data
+        .call(text => text.append("tspan")
+            .attr("id", d => `pie-labels-name-${d.data.name}`)
+            .attr("x", 0) // center the text
+            .attr("y", "-0.4em") // add a space between the name and the value
+            .attr("font-weight", "bold")
+            .text(d => d.data.name))
+        // add the value of the data
+        .call(text => text.filter(d => (d.endAngle - d.startAngle) > 0.25).append("tspan")
+            .attr("id", d => `pie-labels-value-${d.data.name}`)
+            .attr("x", 0) // center the text
+            .attr("y", "0.7em") // add a space between the name and the value
+            .attr("fill-opacity", 0.7) // make it lighter
+            .text(d => d.data.value)); // add the value
 };
 
+/**
+ * Draw a pie chart with the statistics of a character
+ * 
+ * @param {*} data
+ * @param {*} displayTooltip
+ * @param {*} displayValue
+ */
 export default function D3PieChart({
     data,
 }) {

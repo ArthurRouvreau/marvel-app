@@ -1,5 +1,22 @@
 [
     {
+        "id": "1009220",
+        "name": "Captain America",
+        "description": "Vowing to serve his country any way he could, young Steve Rogers took the super soldier serum to become America's one-man army. Fighting for the red, white and blue for over 60 years, Captain America is the living, breathing symbol of freedom and liberty.",
+        "modified": "2020-04-04T19:01:59-0400",
+        "thumbnail": {
+            "path": "http://i.annihil.us/u/prod/marvel/i/mg/3/50/537ba56d31087",
+            "extension": "jpg"
+        },
+        "capacities": {
+            "force": 4,
+            "intelligence": 3,
+            "durability": 3,
+            "energy": 1,
+            "speed": 2
+        }
+    },
+    {
         "id": "1009175",
         "name": "Beast",
         "description": "",
@@ -15,23 +32,6 @@
             "energy": 6,
             "speed": 1,
             "fighting": 3
-        }
-    },
-    {
-        "id": "1009220",
-        "name": "Captain America",
-        "description": "Vowing to serve his country any way he could, young Steve Rogers took the super soldier serum to become America's one-man army. Fighting for the red, white and blue for over 60 years, Captain America is the living, breathing symbol of freedom and liberty.",
-        "modified": "2020-04-04T19:01:59-0400",
-        "thumbnail": {
-            "path": "http://i.annihil.us/u/prod/marvel/i/mg/3/50/537ba56d31087",
-            "extension": "jpg"
-        },
-        "capacities": {
-            "force": 4,
-            "intelligence": 3,
-            "durability": 3,
-            "energy": 1,
-            "speed": 2
         }
     },
     {
@@ -178,9 +178,7 @@
         "capacities": {
             "force": 4,
             "intelligence": 2,
-            "durability": 4,
-            "energy": 1,
-            "speed": 2
+            "durability": 4
         }
     }
 ]
