@@ -1,27 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="C:\Users\arouvr03\marvel-app\src\api\characters-api.test.js">
-    <testCase name="characters-api getCharacters should return the list of characters with default order" duration="17"/>
-    <testCase name="characters-api getCharacters should return the list of characters ordered by name ascending" duration="0"/>
-    <testCase name="characters-api getCharacters should return the list of characters ordered by name descending" duration="1"/>
-    <testCase name="characters-api getCharacters should return the list of characters ordered by modified field ascending" duration="1"/>
-    <testCase name="characters-api getCharacters should return the list of characters ordered by modified field descending" duration="0"/>
-    <testCase name="characters-api getCharacterById should return the character with the given id" duration="0"/>
-    <testCase name="characters-api getCharacterById should throw an error if the character with the given id is not found" duration="5"/>
-  </file>
-  <file path="C:\Users\arouvr03\marvel-app\src\pages\CharacterDetailPage.test.jsx">
-  </file>
-  <file path="C:\Users\arouvr03\marvel-app\src\components\D3PieChart.test.js">
-  </file>
-  <file path="C:\Users\arouvr03\marvel-app\src\Layout.test.jsx">
-    <testCase name="renders the layout with correct elements" duration="78"/>
-  </file>
-  <file path="C:\Users\arouvr03\marvel-app\src\pages\CharactersPage.test.jsx">
-    <testCase name="CharactersPage render CharactersPage component" duration="86"/>
-    <testCase name="CharactersPage render CharactersPage component with order and orderBy from search params" duration="9"/>
-    <testCase name="CharactersPage render CharactersPage component with order and orderBy when the select changes" duration="20"/>
-  </file>
-  <file path="C:\Users\arouvr03\marvel-app\src\components\RechartsPieChart.test.jsx">
-    <testCase name="RechartsPieChart renders RechartsPieChart" duration="55"/>
-  </file>
 </testExecutions>
