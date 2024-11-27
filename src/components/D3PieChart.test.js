@@ -25,7 +25,7 @@ describe('D3PieChart', () => {
     test('renders D3PieChart with label and value', () => {
         render(<D3PieChart data={data} />);
 
-        screen.debug();
+        // screen.debug();
 
         expect(document.getElementById('pie-container')).toBeInTheDocument();
 
@@ -35,6 +35,27 @@ describe('D3PieChart', () => {
             expect(nameLabel).toBeInTheDocument();
             const valueLabel = screen.getByText(item.value);
             expect(valueLabel).toBeInTheDocument();
+        });
+
+        // expect to have a svg element
+        const svgElement = document.querySelector('svg');
+        expect(svgElement).toBeInTheDocument();
+
+        // expect to have a path element for each data
+        const pathElements = document.querySelectorAll('path');
+        expect(pathElements).toHaveLength(Object.keys(data).length);
+        
+        // Check if the data is displayed
+        data.forEach((item) => {
+            // check if the label is displayed
+            const tspan = document.getElementById(`pie-labels-name-${item.name}`);
+            expect(tspan).toBeInTheDocument();
+            expect(tspan.textContent).toBe(item.name);
+
+            // check if the value is displayed
+            const tspanValue = document.getElementById(`pie-labels-value-${item.name}`);
+            expect(tspanValue).toBeInTheDocument();
+            expect(tspanValue.textContent).toBe(item.value.toString());
         });
     });
 });

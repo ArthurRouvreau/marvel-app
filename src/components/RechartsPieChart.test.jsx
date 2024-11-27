@@ -10,12 +10,8 @@ jest.mock('./chart-utils', () => ({
 
 describe('RechartsPieChart', () => {
     const data = [
-        { name: 'Force', value: 10 },
-        { name: 'Intelligence', value: 8 },
-        { name: 'Energy', value: 7 },
-        { name: 'Speed', value: 9 },
-        { name: 'Durability', value: 6 },
-        { name: 'Fighting', value: 5 },
+        { name: 'Force', value: 8 },
+        { name: 'Intelligence', value: 5 },
     ];
 
     beforeEach(() => {

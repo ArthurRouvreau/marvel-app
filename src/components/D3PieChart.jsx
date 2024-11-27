@@ -1,7 +1,21 @@
-import PropTypes from 'prop-types';
 import { useEffect } from "react";
 import * as d3 from "d3";
 import { prepareData } from './chart-utils';
+
+// Define the diameter of the pie
+const diameter = 100;
+
+// Define the margin
+const margin = {
+    top: 10, right: 10, bottom: 10, left: 10,
+};
+
+// Define the width and height using the margin conventions
+const width = 2 * diameter + margin.left + margin.right;
+const height = 2 * diameter + margin.top + margin.bottom;
+
+// Define the radius
+const radius = Math.min(width, height) / 2;
 
 /**
  * Draw the pie chart
@@ -10,7 +24,7 @@ import { prepareData } from './chart-utils';
  * @param {*} displayValue 
  */
 const drawChart = (data) => {
-    // Remove the old svg
+    // Remove the old svg if it exists (in development)
     d3.select('#pie-container')
         .select('svg')
         .remove();
@@ -20,23 +34,8 @@ const drawChart = (data) => {
         // colors based on data
         .domain(data.map(d => d.name))
         // .range(["red", "blue", "green", "yellow", "orange", "purple"]);
-        .range(d3.schemeDark2);
-    //.range(d3.quantize(t => d3.interpolateSpectral(t * 0.8 + 0.1), filteredData.length).reverse());
-
-    // Define the diameter of the pie
-    const diameter = 100;
-
-    // Define the margin
-    const margin = {
-        top: 10, right: 10, bottom: 10, left: 10,
-    };
-
-    // Define the width and height using the margin conventions
-    const width = 2 * diameter + margin.left + margin.right;
-    const height = 2 * diameter + margin.top + margin.bottom;
-
-    // Define the radius
-    const radius = Math.min(width, height) / 2;
+        // .range(d3.schemeDark2);
+        .range(d3.quantize(t => d3.interpolateSpectral(t * 0.8 + 0.1), data.length).reverse());
 
     // Create the arc
     const arc = d3.arc()
@@ -117,14 +116,3 @@ export default function D3PieChart({
         <div id="pie-container" />
     );
 }
-
-D3PieChart.propTypes = {
-    data: PropTypes.shape({
-        force: PropTypes.number,
-        intelligence: PropTypes.number,
-        energy: PropTypes.number,
-        speed: PropTypes.number,
-        durability: PropTypes.number,
-        fighting: PropTypes.number,
-    }),
-};
