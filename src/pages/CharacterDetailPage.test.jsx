@@ -44,5 +44,23 @@ describe('CharacterDetailPage', () => {
         const imageElement = screen.getByAltText(character.name);
         expect(imageElement).toBeInTheDocument();
         expect(imageElement).toHaveAttribute('src', 'path/to/image/standard_large.jpg');
+
+        // expect to have a heading with the text "Capacities"
+        const h2CapacitiesElement = screen.getByRole('heading', { level: 2, name: 'Capacities' });
+        expect(h2CapacitiesElement).toBeInTheDocument();
+
+        // expect to have a heading with the text "Using D3"
+        const h3D3Element = screen.getByRole('heading', { level: 3, name: 'Using D3' });
+        expect(h3D3Element).toBeInTheDocument();
+
+        // expect to have a heading with the text "Using Recharts"
+        const h3RechartsElement = screen.getByRole('heading', { level: 3, name: 'Using Recharts' });
+        expect(h3RechartsElement).toBeInTheDocument();
+
+        // expect to have a div with the id "pie-container"
+        expect(document.getElementById('pie-container')).toBeInTheDocument();
+
+        // expect to a an div with class "recharts-wrapper"
+        expect(document.querySelector('.recharts-wrapper')).toBeInTheDocument();
     });
 });

@@ -85,3 +85,10 @@ li a {
   color: #333;
   text-decoration: none;
 }
+
+/* hide footer on small screens */
+@media (max-width: 600px) {
+  footer {
+    display: none;
+  }
+}
