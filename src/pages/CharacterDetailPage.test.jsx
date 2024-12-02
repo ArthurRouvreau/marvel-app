@@ -1,11 +1,13 @@
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
-import { useLoaderData } from 'react-router';
+import { render, screen, waitFor } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import CharacterDetailPage from './CharacterDetailPage';
-import { formatModifiedDate } from './date'; // Assurez-vous que la fonction de formatage est bien importée
+import { useLoaderData } from 'react-router';
+import { formatModifiedDate } from './date';
 
 // Mock the useLoaderData hook
 jest.mock('react-router', () => ({
+    ...jest.requireActual('react-router'),
     useLoaderData: jest.fn(),
 }));
 
@@ -13,8 +15,7 @@ describe('CharacterDetailPage', () => {
     const character = {
         name: 'Thor',
         description: 'God of Thunder',
-        // Modifié pour inclure un format de date valide
-        modified: '2023-10-01T00:00:00Z',  // Format ISO 8601 valide
+        modified: '2023-10-01T00:00:00Z', // Format ISO 8601 valide
         thumbnail: { path: 'path/to/image', extension: 'jpg' },
         capacities: {
             force: 5,
@@ -27,14 +28,21 @@ describe('CharacterDetailPage', () => {
     };
 
     beforeEach(() => {
-        useLoaderData.mockReturnValue(character); // Mock the return value of useLoaderData
+        // Mock the useLoaderData hook to return the character data
+        useLoaderData.mockReturnValue(character);
     });
 
-    test('render CharacterDetailPage component', () => {
-        render(<CharacterDetailPage />);
+    test('renders CharacterDetailPage component', async () => {
+        render(
+            <MemoryRouter>
+                <CharacterDetailPage />
+            </MemoryRouter>
+        );
 
-        // Verify the document title
-        expect(document.title).toBe('Thor | Marvel App');
+        // Wait for document title to be updated
+        await waitFor(() => {
+            expect(document.title).toBe('Thor | Marvel App');
+        });
 
         // Verify the name of the character
         const nameElement = screen.getByText(character.name);

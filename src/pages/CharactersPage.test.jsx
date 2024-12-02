@@ -1,13 +1,13 @@
 import '@testing-library/jest-dom';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import CharactersPage from './CharactersPage';
 import { DEFAULT_ORDER, DEFAULT_ORDERBY } from '../api/characters-api';
 
 // Mock the useLoaderData hook to provide character data for the test
 const characters = [
-    { id: "1", name: "Thor" },
-    { id: "2", name: "Captain America" }
+    { id: "1", name: "Thor", modified: '2023-10-01T00:00:00Z' }, // Assurez-vous que la date est bien formée
+    { id: "2", name: "Captain America", modified: '2023-10-01T00:00:00Z' }
 ];
 
 jest.mock('react-router', () => ({
