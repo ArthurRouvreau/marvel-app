@@ -1,18 +1,21 @@
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
-import { useLoaderData } from 'react-router';
+import { render, screen, waitFor } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import CharacterDetailPage from './CharacterDetailPage';
+import { useLoaderData } from 'react-router';
+import { formatModifiedDate } from '../components/date';
 
 // Mock the useLoaderData hook
 jest.mock('react-router', () => ({
+    ...jest.requireActual('react-router'),
     useLoaderData: jest.fn(),
 }));
- 
+
 describe('CharacterDetailPage', () => {
     const character = {
         name: 'Thor',
         description: 'God of Thunder',
-        modified: '2023-10-01',
+        modified: '2023-10-01T00:00:00Z', // Format ISO 8601 valide
         thumbnail: { path: 'path/to/image', extension: 'jpg' },
         capacities: {
             force: 5,
@@ -25,42 +28,54 @@ describe('CharacterDetailPage', () => {
     };
 
     beforeEach(() => {
+        // Mock the useLoaderData hook to return the character data
         useLoaderData.mockReturnValue(character);
     });
 
-    test('render CharacterDetailPage component', () => {
-        render(<CharacterDetailPage />);
-        expect(document.title).toBe('Thor | Marvel App');
+    test('renders CharacterDetailPage component', async () => {
+        render(
+            <MemoryRouter>
+                <CharacterDetailPage />
+            </MemoryRouter>
+        );
 
+        // Wait for the title update to happen (wait for the effect to complete)
+        await waitFor(() => expect(document.title).toBe('Thor | Marvel App'));
+
+        // Verify the name of the character
         const nameElement = screen.getByText(character.name);
         expect(nameElement).toBeInTheDocument();
 
+        // Verify the character's description
         const descriptionElement = screen.getByText(character.description);
         expect(descriptionElement).toBeInTheDocument();
 
-        const modifiedElement = screen.getByText(character.modified);
+        // Format the date to check that it is displayed correctly
+        const formattedDate = formatModifiedDate(character.modified);
+
+        // Verify the modified date is correctly formatted and displayed
+        const modifiedElement = screen.getByText(formattedDate);
         expect(modifiedElement).toBeInTheDocument();
 
+        // Verify the character's image
         const imageElement = screen.getByAltText(character.name);
         expect(imageElement).toBeInTheDocument();
         expect(imageElement).toHaveAttribute('src', 'path/to/image/standard_large.jpg');
 
-        // expect to have a heading with the text "Capacities"
+        // Verify headings and content for "Capacities", "Using D3", and "Using Recharts"
         const h2CapacitiesElement = screen.getByRole('heading', { level: 2, name: 'Capacities' });
         expect(h2CapacitiesElement).toBeInTheDocument();
 
-        // expect to have a heading with the text "Using D3"
         const h3D3Element = screen.getByRole('heading', { level: 3, name: 'Using D3' });
         expect(h3D3Element).toBeInTheDocument();
 
-        // expect to have a heading with the text "Using Recharts"
         const h3RechartsElement = screen.getByRole('heading', { level: 3, name: 'Using Recharts' });
         expect(h3RechartsElement).toBeInTheDocument();
 
-        // expect to have a div with the id "pie-container"
+        // Verify if the pie chart container is present
         expect(document.getElementById('pie-container')).toBeInTheDocument();
 
-        // expect to a an div with class "recharts-wrapper"
+        // Verify if the Recharts wrapper div is present
         expect(document.querySelector('.recharts-wrapper')).toBeInTheDocument();
     });
 });
