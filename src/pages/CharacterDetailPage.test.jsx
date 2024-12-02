@@ -3,7 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import CharacterDetailPage from './CharacterDetailPage';
 import { useLoaderData } from 'react-router';
-import { formatModifiedDate } from './date';
+import { formatModifiedDate } from '../components/date';
 
 // Mock the useLoaderData hook
 jest.mock('react-router', () => ({
@@ -39,10 +39,8 @@ describe('CharacterDetailPage', () => {
             </MemoryRouter>
         );
 
-        // Wait for document title to be updated
-        await waitFor(() => {
-            expect(document.title).toBe('Thor | Marvel App');
-        });
+        // Wait for the title update to happen (wait for the effect to complete)
+        await waitFor(() => expect(document.title).toBe('Thor | Marvel App'));
 
         // Verify the name of the character
         const nameElement = screen.getByText(character.name);
