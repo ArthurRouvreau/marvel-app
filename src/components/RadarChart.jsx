@@ -12,6 +12,9 @@ const RadarChartComponent = ({ character1, character2, color1, color2 }) => {
         { subject: 'Fighting', character1: character1.capacities.fighting, character2: character2.capacities.fighting }
     ];
 
+    // Fonction pour appliquer une couleur claire si la capacité est égale à 0
+    const getOpacity = (value) => (value === 0 ? 0.1 : 0.6); // Faible opacité pour les capacités à 0
+
     return (
         <ResponsiveContainer width="100%" height={400}>
             <RadarChart outerRadius="80%" data={data} data-testid="radar-chart">
@@ -24,7 +27,7 @@ const RadarChartComponent = ({ character1, character2, color1, color2 }) => {
                     dataKey="character1" 
                     stroke={color1} 
                     fill={color1} 
-                    fillOpacity={0.6}  // S'assurer que la zone est remplie avec la couleur
+                    fillOpacity={data[0].character1 === 0 ? 0.1 : 0.6}  // Utilisation de l'opacité faible si capacité = 0
                 />
                 {/* Radar pour le deuxième personnage */}
                 <Radar 
@@ -32,7 +35,7 @@ const RadarChartComponent = ({ character1, character2, color1, color2 }) => {
                     dataKey="character2" 
                     stroke={color2} 
                     fill={color2} 
-                    fillOpacity={0.6}  // S'assurer que la zone est remplie avec la couleur
+                    fillOpacity={data[0].character2 === 0 ? 0.1 : 0.6}  // Utilisation de l'opacité faible si capacité = 0
                 />
             </RadarChart>
         </ResponsiveContainer>
