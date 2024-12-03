@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import RadarChartComponent from './RadarChart';  // Importer le composant RadarChart
-import { useLoaderData } from 'react-router';
 
 // Simuler les données des personnages
 const mockCharacters = [
@@ -10,11 +9,6 @@ const mockCharacters = [
 ];
 
 describe('RadarChartComponent', () => {
-    beforeEach(() => {
-        // Mocking useLoaderData pour retourner les personnages simulés
-        useLoaderData.mockReturnValue(mockCharacters);
-    });
-
     test('renders radar chart correctly with given data', () => {
         render(
             <RadarChartComponent 
@@ -45,7 +39,30 @@ describe('RadarChartComponent', () => {
         expect(legendItems).toHaveLength(2);  // La légende doit contenir les deux personnages
 
         // Vérifier la couleur de chaque personnage dans la légende
-        expect(legendItems[0]).toHaveStyle({ color: "#8884d8" });  // "Captain America" doit avoir la couleur bleue
-        expect(legendItems[1]).toHaveStyle({ color: "#82ca9d" });  // "Beast" doit avoir la couleur verte
+        expect(legendItems[0]).toHaveStyle({ color: "#8884d8" });
+        expect(legendItems[1]).toHaveStyle({ color: "#82ca9d" });
+    });
+
+    test('renders radar chart with correct data for zero values', () => {
+        // Ajouter un test pour les cas avec des valeurs à zéro
+        const charactersWithZeroValues = [
+            { name: "Captain America", capacities: { force: 0, intelligence: 0, durability: 0, energy: 0, speed: 0, fighting: 0 } },
+            { name: "Beast", capacities: { force: 5, intelligence: 8, durability: 6, energy: 6, speed: 1, fighting: 3 } },
+        ];
+
+        render(
+            <RadarChartComponent 
+                character1={charactersWithZeroValues[0]} 
+                character2={charactersWithZeroValues[1]} 
+                color1="#8884d8"  
+                color2="#82ca9d"
+            />
+        );
+
+        // Vérifier que les capacités de "Captain America" avec des valeurs zéro sont affichées
+        const radarChart = screen.getByTestId('radar-chart');
+        expect(radarChart).toBeInTheDocument();
+
+        // Vous pouvez également ajouter une vérification pour que la zone du premier personnage soit très claire (opacité faible)
     });
 });

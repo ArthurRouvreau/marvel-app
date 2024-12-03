@@ -65,11 +65,9 @@ describe('CompareCharactersPage', () => {
         );
 
         // Sélectionner un autre personnage pour Character 1
-        const select1 = screen.getByLabelText(/select character 1/i);
         fireEvent.change(select1, { target: { value: '1' } }); // Sélectionner "Beast"
 
         // Sélectionner un autre personnage pour Character 2
-        const select2 = screen.getByLabelText(/select character 2/i);
         fireEvent.change(select2, { target: { value: '0' } }); // Sélectionner "Captain America"
 
         // Vérifier que la légende a bien été mise à jour
