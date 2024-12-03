@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLoaderData } from 'react-router';
-import RadarChart from '../components/RadarChart'; // Importer le composant RadarChart de Recharts
+import RadarChart from '../components/RadarChart';  // Importer le composant RadarChart de Recharts
 
 const CompareCharactersPage = () => {
     const characters = useLoaderData();  // Charger la liste des personnages
@@ -25,10 +25,9 @@ const CompareCharactersPage = () => {
 
     return (
         <div>
-            <h2>Compare Characters</h2>
-            <div style={{ display: 'flex' }}>
-                <div>
-                    <label>Select Character 1</label>
+            <h2>Compare characters</h2>
+            <div className="compare-container">
+                <div className="compare-select">
                     <select
                         value={option1.value}
                         onChange={(e) => handleCharacterChange(1, options[e.target.value])}
@@ -40,8 +39,8 @@ const CompareCharactersPage = () => {
                         ))}
                     </select>
                 </div>
-                <div>
-                    <label>Select Character 2</label>
+                <span className="compare-with-text">with</span> {/* Texte 'with' */}
+                <div className="compare-select">
                     <select
                         value={option2.value}
                         onChange={(e) => handleCharacterChange(2, options[e.target.value])}
@@ -55,8 +54,24 @@ const CompareCharactersPage = () => {
                 </div>
             </div>
 
-            <h3>Character Comparison</h3>
-            <RadarChart character1={characters[option1.value]} character2={characters[option2.value]} />
+            <RadarChart 
+                character1={characters[option1.value]} 
+                character2={characters[option2.value]} 
+                color1="#8884d8"  // Bleu pour le premier personnage
+                color2="#82ca9d"  // Vert pour le deuxième personnage
+            />
+
+            {/* Légende sous le graphique */}
+            <div className="legend-container">
+                <div className="legend-item">
+                    <div className="legend-color" style={{ backgroundColor: "#8884d8" }}></div>
+                    <span>{characters[option1.value].name}</span>
+                </div>
+                <div className="legend-item">
+                    <div className="legend-color" style={{ backgroundColor: "#82ca9d" }}></div>
+                    <span>{characters[option2.value].name}</span>
+                </div>
+            </div>
         </div>
     );
 };
