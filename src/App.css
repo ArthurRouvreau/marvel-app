@@ -92,3 +92,52 @@ li a {
     display: none;
   }
 }
+
+/* Container pour la page de comparaison */
+.compare-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Les menus déroulants pour choisir les personnages */
+.compare-select {
+  margin-right: 10px;
+}
+
+/* Texte "with" entre les deux sélecteurs */
+.compare-with-text {
+  margin-right: 10px;
+}
+
+/* Légende sous le graphique radar */
+.legend-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-right: 30px;
+  padding-bottom: 10px;  /* Ajout d'un peu d'espace sous chaque élément de légende */
+  border-bottom: 3px solid #ccc;  /* Bordure grise sous chaque élément */
+}
+
+.legend-item:first-child {
+  /* Appliquer la couleur du nom du personnage pour le premier élément */
+  color: #8884d8; /* Bleu pour le premier personnage */
+}
+
+.legend-item:last-child {
+  /* Appliquer la couleur du nom du personnage pour le deuxième élément */
+  color: #82ca9d; /* Vert pour le deuxième personnage */
+}
+
+.legend-color {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
