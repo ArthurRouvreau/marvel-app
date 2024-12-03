@@ -17,7 +17,7 @@ const RadarChartComponent = ({ character1, character2, color1, color2 }) => {
 
     return (
         <ResponsiveContainer width="100%" height={400}>
-            <RadarChart outerRadius="80%" data={data} data-testid="radar-chart">
+            <RadarChart outerRadius="80%" data={data} data-testid="radar-chart"> {/* Ajout du data-testid ici */}
                 <PolarGrid />
                 <PolarAngleAxis dataKey="subject" />
                 <PolarRadiusAxis />
@@ -27,7 +27,7 @@ const RadarChartComponent = ({ character1, character2, color1, color2 }) => {
                     dataKey="character1" 
                     stroke={color1} 
                     fill={color1} 
-                    fillOpacity={data[0].character1 === 0 ? 0.1 : 0.6}  // Utilisation de l'opacité faible si capacité = 0
+                    fillOpacity={data.map(item => getOpacity(item.character1))}  // Utilisation de la fonction getOpacity pour chaque capacité
                 />
                 {/* Radar pour le deuxième personnage */}
                 <Radar 
@@ -35,7 +35,7 @@ const RadarChartComponent = ({ character1, character2, color1, color2 }) => {
                     dataKey="character2" 
                     stroke={color2} 
                     fill={color2} 
-                    fillOpacity={data[0].character2 === 0 ? 0.1 : 0.6}  // Utilisation de l'opacité faible si capacité = 0
+                    fillOpacity={data.map(item => getOpacity(item.character2))}  // Utilisation de la fonction getOpacity pour chaque capacité
                 />
             </RadarChart>
         </ResponsiveContainer>
